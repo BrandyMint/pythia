@@ -18,9 +18,8 @@ class RssSource
       doc.css('span.lightblue a').each do |rss|
         is_rss = (is_rss + 1) % 2
         if is_rss == 0
-          /http:\/\/(.*?)\//.match rss.text
-          name_site = $1
-          #p name_site, rss.text #for testing
+          name_site = rss.text.match("http:\/\/(.*?)\/")[1]
+          # puts name_site, rss.text          
           Feed.create(:name =>name_site, :url => rss.text)
         end
 
