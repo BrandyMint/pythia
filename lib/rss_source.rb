@@ -1,7 +1,8 @@
+require "open-uri"
+require "nokogiri"
+
 class RssSource
   def self.update
-    require "open-uri"
-    require "nokogiri"
     url = "http://subscribe.ru/catalog/business?rss"
     id_next_page = 201
     is_end = false
@@ -23,5 +24,3 @@ class RssSource
     end
   end
 end
-
-RssSource.update
