@@ -4,7 +4,7 @@ require "nokogiri"
 
 class SubscribeSource < Source
 
-    def self.updateFeeds
+  def update_feeds
     url = "http://subscribe.ru/catalog/business?rss"
     id_next_page = 201  #for next page
     is_end = false
@@ -18,7 +18,7 @@ class SubscribeSource < Source
 
       is_rss = true
       doc.css('span.lightblue a').each do |rss|
-        is_rss = !true
+        is_rss = !is_rss
         if is_rss
           name_site = rss.text.match("http:\/\/(.*?)\/")[1]
           #puts name_site, rss.text          
