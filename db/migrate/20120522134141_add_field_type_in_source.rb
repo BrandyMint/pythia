@@ -4,6 +4,6 @@ class AddFieldTypeInSource < ActiveRecord::Migration
   end
 
   def down
-    remove_column :sources
+    remove_column :sources, :type
   end
 end
