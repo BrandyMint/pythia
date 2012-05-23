@@ -49,8 +49,9 @@ ActiveRecord::Schema.define(:version => 20120523100513) do
   create_table "feeds", :force => true do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "source_id",  :default => 1, :null => false
   end
 
   create_table "sources", :force => true do |t|
