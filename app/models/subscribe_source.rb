@@ -22,7 +22,7 @@ class SubscribeSource < Source
         if is_rss
           name_site = rss.text.match("http:\/\/(.*?)\/")[1]
           #puts name_site, rss.text          
-          Feed.create(:name =>name_site, :url => rss.text)
+          self.feeds.create(:name =>name_site, :url => rss.text)
         end
 
       end

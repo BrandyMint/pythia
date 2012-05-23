@@ -1,4 +1,4 @@
 class Feed < ActiveRecord::Base
   attr_accessible :name, :url
-  belongs_to :source
+  #subscribe_id :source
 end
