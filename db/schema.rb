@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20120523100513) do
     t.string   "url"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-    t.integer  "source_id",  :default => 1, :null => false
+    t.integer  "source_id",  :default => 0, :null => false
   end
 
   create_table "sources", :force => true do |t|
@@ -59,8 +59,7 @@ ActiveRecord::Schema.define(:version => 20120523100513) do
     t.string   "url"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-    t.string   "type"
-    t.integer  "subscribe_id", :default => 1, :null => false
+    t.string   "type",       :default => "0", :null => false
   end
 
 end
