@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
@@ -42,3 +43,8 @@ gem 'activeadmin'
 
 gem "nokogiri"
 gem "activerecord-postgresql-adapter"
+gem "ruby-debug19"
+gem "simple-rss"
+gem 'mysql2', '< 0.3'
+
+# gem  "activerecord-mysql2_downcase-adapter"
