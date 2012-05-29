@@ -15,12 +15,12 @@ development:
   username: eka
   password: 123
   
-development:
+icf:
   adapter: postgresql
   encoding: utf8
-  database: rails
-  username: eka
-  password: 123
+  database: pythia
+  username: wwwdata
+  password:
 
 production:
   adapter: postgresql
