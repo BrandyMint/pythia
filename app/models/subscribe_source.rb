@@ -2,33 +2,39 @@ require "open-uri"
 require "nokogiri"
 
 
-class SubscribeSource < Source
-
+class Source::SubscrierRu < Source
+  URL = "http://subscribe.ru/catalog/business?rss"
+  
+  # Брать по очереди все страницы с сайта
+  # в результате искать rss-ки и скалдывать их в feed
   def update_feeds
-    url = "http://subscribe.ru/catalog/business?rss"
-    id_next_page = 201  #for next page
-    is_end = false
-    
-    while not is_end
-      begin
-        doc = Nokogiri::HTML(open(url))
-      rescue OpenURI::HTTPError => e
-        is_end = true
+    site_pages.each do |page|
+      page.each do |parsed_feed|
+        self.feeds.create :name => parsed_feed.name, :url => parsed_feed.url
       end
-
-      is_rss = true
-      doc.css('span.lightblue a').each do |rss|
-        is_rss = !is_rss
-        if is_rss
-          name_site = rss.text.match("http:\/\/(.*?)\/")[1]
-          #puts name_site, rss.text          
-          self.feeds.create(:name =>name_site, :url => rss.text)
-        end
-
-      end
-      url = "http://subscribe.ru/catalog/business?rss&pos=#{id_next_page}"
-      id_next_page += 200
-      
     end
   end
+  
+  private
+  
+  def site_pages
+    page = 0
+    arr = []
+    while doc = open_site page+=1 do
+      arr << doc.
+           css('span.lightblue a').
+           each { |rss| rss.text.match("http:\/\/(.*?)\/")[1] }.
+           select_with_index{|item, i| item if i % 2 == 1}
+    end
+  end
+  
+  def open_site page
+    Nokogiri::HTML( open( site_url page ) )
+    rescue OpenURI::HTTPError
+  end
+   
+  def site_url page=1
+     URL + "&pos=#{page*200+1}"
+  end
+  
 end
