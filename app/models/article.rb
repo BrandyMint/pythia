@@ -1,7 +1,7 @@
 # coding: utf-8
 class Article < ActiveRecord::Base
   validates :text, :presence => true
-  validates :url, :presence => true
+  validates :url, :presence => true, :url => true
 
   attr_accessible :title, :text, :url
   belongs_to :feed
