@@ -46,5 +46,5 @@ gem "activerecord-postgresql-adapter"
 gem "ruby-debug19"
 gem "simple-rss"
 gem 'mysql2', '< 0.3'
-
+gem 'mysql2_downcase'
 # gem  "activerecord-mysql2_downcase-adapter"

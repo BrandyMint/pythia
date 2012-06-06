@@ -1,9 +1,9 @@
 # coding: utf-8
 require 'open-uri'
-
+# Валидация и уникальный ключ для Feed
 class Feed < ActiveRecord::Base
-  validates :name, :presence => true  
-  validates :url, :presence => true  
+  validates :name, :presence => true, :uniqueness => true
+  validates :url, :presence => true, :uniqueness => true  
   attr_accessible :name, :url
   belongs_to :source
   has_many :articles
