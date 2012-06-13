@@ -1,30 +1,24 @@
 # coding: utf-8
+
 class Article < ActiveRecord::Base
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
 
   attr_accessible :title, :text, :url
-  belongs_to :feed
+  belongs_to :feed, :counter_cache => true
 
-  def search
-    text.mb_chars.upcase.split(" ").each do |word|
-      if search_company(word) then
-        puts word
-      end
-    end
+  def search_company
+     Company.find_each do |company|
+        update_mentions_company company if text.index(company.name)
+     end
   end
 
-def search_company name_company=nil
-  all_names_company = []
-  #...
-  all_names_company.push("цена".mb_chars.upcase)
-  all_names_company.index(name_company)
-end
+private
 
-# # TODO move to lib
-#   def search_word word
-#     Company.find word
-#     CompanySynomims.find word
-#     Security.find
-#   end
+  def update_mentions_company company
+    record_of_company = CompanyMention.find_by_company_id(company.id)
+    CompanyMention.create(:company_id => company.id, :mention_count => 1) if record_of_company
+    record_of_company.increment(:mention_count)
+  end
+
 end
