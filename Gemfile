@@ -43,7 +43,8 @@ gem 'activeadmin'
 
 gem "nokogiri"
 gem "activerecord-postgresql-adapter"
-gem "ruby-debug19"
+# gem "ruby-debug19"
+gem "debugger"
 gem "simple-rss"
 #gem 'mysql2', '< 0.3'
 gem 'mysql2' 

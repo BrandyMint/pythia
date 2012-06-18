@@ -1,0 +1,16 @@
+<h1>CompanyMention#index</h1>
+<p>Find me in app/views/company_mention/index.html.erb</p>
+
+
+<table>
+<% @table_mentions.each do |key, value| %>
+	<tr>
+     <td><%= key %></td>
+     <td><%= value %></td>
+	</tr>	
+
+<% end %>
+</table>
+
+<h2>for debug:</h2>
+<p><%= @article_mentions %></p>
