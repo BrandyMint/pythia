@@ -15,6 +15,14 @@ class Article < ActiveRecord::Base
   end
 
 
+  def delete_if_this_dublicate
+    Article.find_each do |article|
+      self.delete if article.title == self.title and (article.id != self.id)
+    end
+
+  end
+
+
 private
 
 
