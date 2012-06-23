@@ -3,7 +3,7 @@ class CreateCompanyMentions < ActiveRecord::Migration
     create_table :company_mentions do |t|
       t.integer :company_id
       t.integer :mention_count
-
+      
       t.timestamps
     end
   end
