@@ -12,7 +12,7 @@ class Source::SubscriberRu < Source
     while not is_end
       begin
         doc = Nokogiri::HTML(open(url))
-      rescue OpenURI::HTTPError => e
+      rescue OpenURI::HTTPError => e        
         is_end = true
       end
 
@@ -21,7 +21,6 @@ class Source::SubscriberRu < Source
         is_rss = !is_rss
         if is_rss
           name_site = rss.text.match("http:\/\/(.*?)\/")[1]
-          #puts name_site, rss.text          
           self.feeds.create(:name =>name_site, :url => rss.text)
         end
 

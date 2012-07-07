@@ -1,0 +1,89 @@
+= javascript_include_tag 'highcharts', :debug => true
+= javascript_include_tag 'aplication', :debug => true
+
+= @company.name
+- company_articles = @company.articles.last_week
+%br
+- company_articles.each do |article|
+  = link_to article.title, article.url
+ 
+- data_article = []
+- time_article = []
+- @company_data.each do |r| 
+  - data_article << r.count_articles
+  - time_article << r.date_created
+
+
+#container
+
+:javascript
+  $(function () {
+    var chart;
+    var company_name = "#{@company.name}"
+    var company_data = [
+    #{ 
+        data_article.map{ |i| "#{i}" }.join ', '
+    }]
+    
+    
+
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'area'
+            },
+            title: {
+                text: 'График упоминания - '+ company_name + ''
+            },
+            subtitle: {
+                text: 'Source: <a href="http://ya.ru">'+
+                    'Подтекст</a>'
+            },
+            xAxis: {
+                categories: [
+                "#{
+                    time_article.map{ |i| "#{i}" }.join '", "'
+
+                }"]
+                
+            },
+            yAxis: {
+                title: {
+                    text: 'Число упоминаний'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.series.name +' produced <b>'+
+                        Highcharts.numberFormat(this.y, 0) +'</b><br/>warheads in '+ this.x;
+                }
+            },
+            plotOptions: {
+                area: {
+                    pointStart:0,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: company_name,
+                data: company_data 
+                     
+            }]
+        });
+    });  
+  });  
