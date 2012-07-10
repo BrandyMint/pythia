@@ -1,13 +1,10 @@
 Pythia::Application.routes.draw do
 
 
-  # get "company_mentions/index"
-
   ActiveAdmin.routes(self)
 
   root :to => "companies#index"
 
-  
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   # The priority is based upon order of creation:

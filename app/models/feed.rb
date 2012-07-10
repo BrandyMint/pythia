@@ -11,4 +11,14 @@ class Feed < ActiveRecord::Base
   belongs_to :source
   has_many :articles
 
+  def self.update_feeds
+    sources = Source.all
+    start_update sources    
+  end
+
+private
+
+  def self.start_update sources
+    sources.each { |source|  source.update_feeds }
+  end
 end
