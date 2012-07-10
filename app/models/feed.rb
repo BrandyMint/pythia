@@ -2,6 +2,9 @@
 require 'open-uri'
 # Валидация и уникальный ключ для Feed
 class Feed < ActiveRecord::Base
+
+# TODO не верный порядок описания. Сначала идут аттритубы, затем ассоциации, затем валидация
+
   validates :name, :presence => true, :uniqueness => true
   validates :url, :presence => true, :uniqueness => true, :url => true
   attr_accessible :name, :url
@@ -10,6 +13,7 @@ class Feed < ActiveRecord::Base
   
   def update_articles
     # url = берем из Feed.find_each 
+    # Что тут делает этот линк?
     url = 'http://news.yandex.ru/business.rss'
     #Feed.find_each do |url|
       doc = SimpleRSS.parse(open(url))
