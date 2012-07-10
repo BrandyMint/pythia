@@ -1,5 +1,5 @@
 require 'open-uri'
-class Rss < Feed
+class Feed::Rss < Feed
 
   def collect_articles
     begin

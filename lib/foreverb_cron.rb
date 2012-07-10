@@ -1,13 +1,9 @@
 require 'forever'
-
+# TODO move to ./script/
 Forever.run do
 
-  every 30.minutes, :at => "00:00" do
-    Importer.new.import_articles
-  end
-
-  every 1.day, :at => ['00:30']
-    Importer.new.import_companies
+  every 30.minutes do
+     Source.collect_feeds
   end
 
 end

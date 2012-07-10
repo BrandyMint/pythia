@@ -20,7 +20,7 @@ class Source::SubscriberRu < Source
         is_rss = !is_rss
         if is_rss
           name_site = rss.text.match("http:\/\/(.*?)\/")[1]
-          self.feeds.create(:name =>name_site, :url => rss.text)
+          self.feeds.create(:name =>name_site, :url => rss.text, :type => "Feed::Rss")
         end
 
       end

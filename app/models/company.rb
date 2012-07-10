@@ -1,5 +1,7 @@
 class Company < ActiveRecord::Base
 
+# TODO использовать оригинальную базу
+
   has_many :company_mentions
   has_many :articles, :through => :company_mentions
 
