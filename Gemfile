@@ -50,5 +50,20 @@ gem "simple-rss"
 gem 'mysql2' 
 gem 'mysql2_downcase'
 gem 'url_validation'
-
+gem 'haml'
+gem 'foreverb'
 # gem  "activerecord-mysql2_downcase-adapter"
+
+gem 'rsolr', :git => 'git://github.com/mwmitchell/rsolr.git'
+gem "sunspot_rails"
+gem 'sunspot_solr'
+gem 'progress_bar'
+
+group :test, :development do
+  gem "sunspot-rails-tester"
+end
+
+group :test, :development do
+  gem 'rspec'
+  gem 'rspec-rails'
+end

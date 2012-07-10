@@ -1,10 +1,11 @@
 Pythia::Application.routes.draw do
 
-  get "company_mentions/index"
+  # get "company_mentions/index"
 
   ActiveAdmin.routes(self)
 
-  root :to => "company_mentions#index"
+  root :to => "companies#index"
+>>>>>>> feature/mention_for_period_and_link_to_articles
   
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -35,10 +36,7 @@ Pythia::Application.routes.draw do
   #   end
 
   # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  resources :companies
 
   # Sample resource route with more complex sub-resources
   #   resources :products do
