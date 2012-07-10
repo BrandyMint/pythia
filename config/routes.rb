@@ -1,11 +1,12 @@
 Pythia::Application.routes.draw do
 
+
   # get "company_mentions/index"
 
   ActiveAdmin.routes(self)
 
   root :to => "companies#index"
->>>>>>> feature/mention_for_period_and_link_to_articles
+
   
   devise_for :admin_users, ActiveAdmin::Devise.config
 

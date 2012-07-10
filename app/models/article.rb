@@ -13,11 +13,24 @@ class Article < ActiveRecord::Base
   after_create :reindex!
   after_update :reindex!
 
-  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))
-
-
   searchable do
     text :title, :text
+  end
+
+  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))
+
+  def search_company
+    Company.find_each do |company|
+      update_mentions_company company if find_company_in_article company
+    end
+  end
+
+
+  def delete_if_this_dublicate
+    Article.find_each do |article|
+      self.delete if article.title == self.title and (article.id != self.id)
+    end
+
   end
 
   def find_companies_through_sunspot
