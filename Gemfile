@@ -67,3 +67,5 @@ group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'
 end
+
+gem 'seed_dumper'

@@ -1,7 +1,6 @@
 require "open-uri"
 require "nokogiri"
 
-
 class Source::SubscriberRu < Source
 
   def update_feeds
