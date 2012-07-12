@@ -6,8 +6,9 @@ class CompanyMention < ActiveRecord::Base
   # TODO 
   
 
-  def last_week_articles
-    articles.last_week
-  end
+  ## это еще зачем? есть же scope arcicles.last_week его и нужно исопльзовать
+  #def last_week_articles
+  #  articles.last_week
+  #end
   
 end
