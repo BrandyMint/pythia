@@ -3,7 +3,7 @@ class CompanyMention < ActiveRecord::Base
   belongs_to :company
   belongs_to :article
   
-  # TODO 
+  # TODO validation
   
 
   ## это еще зачем? есть же scope arcicles.last_week его и нужно исопльзовать
