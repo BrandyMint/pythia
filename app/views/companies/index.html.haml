@@ -1,22 +1,21 @@
 = javascript_include_tag 'highcharts', :debug => true
 = javascript_include_tag 'aplication', :debug => true
 
+%p
+  Число упоминанаий всего:
+  = @count_mention
 
-- count_all_mention = CompanyMention.all.count
-Число упоминанаий всего:
-= count_all_mention
+Компании:
+%ul
+  -@companies.each do |company|
+    %li
+      =link_to company.name, company
+      (
+      = company.get_company_mention_count
+      )
 
-- @companies.each do |company|
-  %p
-    - company_articles = company.articles.last_week
-    =link_to company.name, company
-    %br
-    - company_articles.each do |article|
-      = article.title
-      / Тестовые данных
-
-= all_mention  = @count_articles.values
-= time_mention = @count_articles.keys
+- all_mention  = @count_articles.values
+- time_mention = @count_articles.keys
 
 
 #container

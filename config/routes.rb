@@ -3,7 +3,7 @@ Pythia::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  root :to => "companies#index"
+  root :to => "home#index"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 

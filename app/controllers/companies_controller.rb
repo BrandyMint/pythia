@@ -3,6 +3,7 @@ class CompaniesController < ApplicationController
   def index
 		@companies = Company.all
     @count_articles = get_count_articles
+    @count_mention = CompanyMention.all.count
   end
   
 

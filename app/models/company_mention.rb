@@ -3,8 +3,7 @@ class CompanyMention < ActiveRecord::Base
   belongs_to :company
   belongs_to :article
   
-  validates :company, :null => false
-  validates :article, :null => false
-
+  validates :company, :presence => true
+  validates :article, :presence => true
     
 end
