@@ -15,9 +15,10 @@ class Article < ActiveRecord::Base
 
   after_create :extract_companies
 
-  searchable do
-    text :title, :text
-  end
+  # searchable do
+  #   text :title, :text
+  # end
+
 
   def extract_companies
     Company.all.each do |company|

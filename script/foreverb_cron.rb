@@ -3,7 +3,7 @@ require 'forever'
 Forever.run do
 
   every 30.minutes do
-     Source.collect_feeds
+     Feed::Rss.collect_articles
   end
 
 end

@@ -69,3 +69,4 @@ group :test, :development do
 end
 
 gem 'seed_dumper'
+gem 'foreman'

@@ -9,7 +9,11 @@ class Company < ActiveRecord::Base
     companies = load_companies_from_icf_db
     update_info_about_companies companies
   end
-  
+
+  def get_company_mention_count
+    self.company_mentions.count
+  end
+
 private
 
   def self.load_companies_from_icf_db

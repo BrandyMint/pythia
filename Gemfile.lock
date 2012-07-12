@@ -80,6 +80,8 @@ GEM
       multi_json (~> 1.0)
     fastercsv (1.5.5)
     fattr (2.2.1)
+    foreman (0.51.0)
+      thor (>= 0.13.6)
     foreverb (0.3.0)
       thor (~> 0.14.6)
     formtastic (2.1.1)
@@ -220,6 +222,7 @@ DEPENDENCIES
   activerecord-postgresql-adapter
   coffee-rails (~> 3.2.1)
   debugger
+  foreman
   foreverb
   haml
   jquery-rails
