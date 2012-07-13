@@ -54,9 +54,9 @@ gem 'haml'
 gem 'foreverb'
 # gem  "activerecord-mysql2_downcase-adapter"
 
-gem 'rsolr', :git => 'git://github.com/mwmitchell/rsolr.git'
-gem "sunspot_rails"
 gem 'sunspot_solr'
+gem "sunspot_rails"
+gem 'rsolr', :git => 'git://github.com/mwmitchell/rsolr.git'
 gem 'progress_bar'
 
 group :test, :development do

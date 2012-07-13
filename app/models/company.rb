@@ -3,9 +3,10 @@ class Company < ActiveRecord::Base
 # TODO использовать оригинальную базу
 
   has_many :company_mentions
+  has_many :company_synonyms
   has_many :articles, :through => :company_mentions
 
-  def self.update_companies
+  def self.update_companies    
     companies = load_companies_from_icf_db
     update_info_about_companies companies
   end
