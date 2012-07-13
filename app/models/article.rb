@@ -2,7 +2,6 @@
 
 class Article < ActiveRecord::Base
   
-  attr_accessible :url
   attr_accessible :title, :text, :url
   
   has_many :company_mentions
@@ -16,23 +15,15 @@ class Article < ActiveRecord::Base
 
   after_create :extract_companies
 
-  searchable do
-    text :title, :text
-  end
+  # searchable do
+  #   text :title, :text
+  # end
 
   # TODO: "extract_companies_with_solr" => "extract_companies_with"
   def extract_companies_with_solr
-    companies = Company.all
-    companies.each do |company|  
-      search = Article.search do
-        fulltext company.name
-      end
-      search.result.each do |result|
-        puts result.body
-      end
-    end
-  end
 
+  end
+  
   def extract_companies
     Company.all.each do |company|
       self.companies << company if include_company? company
