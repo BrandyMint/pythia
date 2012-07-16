@@ -4,7 +4,7 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 puts "Unicorn env: #{rails_env}"
 
 # APP_ROOT = File.expand_path(File.dirname(File.dirname(__FILE__)))
-APP_PATH = '/home/wwwdata/blogs.investcafe.ru/'
+APP_PATH = '/home/wwwdata/pythia/'
 APP_ROOT = APP_PATH + 'current'
 
 if ENV['MY_RUBY_HOME'] && ENV['MY_RUBY_HOME'].include?('rvm')
