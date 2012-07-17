@@ -2,8 +2,10 @@
 = javascript_include_tag 'aplication', :debug => true
 
 %p
-  Число упоминанаий всего:
-  = @count_all_mention
+  Всего статьей:
+  = @count_all_article
+  Из них есть упоминаний по компаниям:
+  = Article.count_company_mentions
 
 Компании:
 %ul
@@ -11,11 +13,13 @@
     %li
       =link_to company.name, company
       (
-      = CompanyMention.get_mentions_by_company company
+      =company.count_publication
       )
 
-- count_mention  = @all_mention_in_days.values
-- date_mentions = @all_mention_in_days.keys
+/ - count_mention  = @all_mention_in_days.values
+/ - date_mentions = @all_mention_in_days.keys
+- count_mention  = [ 1, 2, 3, 4]
+- date_mentions = ['12.01','13.01','14.01','15.01']
 
 
 #container

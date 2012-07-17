@@ -12,16 +12,23 @@ class Article < ActiveRecord::Base
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
 
-  after_create :search_company_by_word
+  after_create :search_and_create_companies_mentions
 
   def search_and_create_companies_mentions
     text_article= self.title + " " + self.text
-    all_world = text_article.split(/\b/).select{ |word| word.size > 2 }
+    all_word = text_article.split(/\b/).select{ |word| word.size > 2 }
     all_word.each do |word|
       company = Company.search_by_word word
       company_mentions.create :article_id => self.id, :company_id => company_id if company
     end
-    
+  end
+
+  def get_mentions_by_company company
+    company_mentions.by_company company
+  end
+
+  def self.count_company_mentions
+    CompanyMention.select('count(*)').group('article_id').all.count
   end
 
 end

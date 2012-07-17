@@ -1,17 +1,28 @@
 = javascript_include_tag 'highcharts', :debug => true
 = javascript_include_tag 'aplication', :debug => true
 
-= @company.name
-- company_articles = @company.articles.last_week
-%br
-- company_articles.each do |article|
-  = link_to article.title, article.url
+%h2
+  КОМПАНИЯ - 
+  = @company.name
+%h3
+  Количество статей про 
+  = @company.name
+  &nbsp;&mdash;
+  = @count_publication
+  шт.
+
+%h3
+  Упоминания:
+- @company.articles.all.each do |article|
+  =link_to article.title, article.url
+  %p
+    =article.text
  
 - data_article = []
 - time_article = []
-- @article_time.each do |r| 
-  - data_article << r.count_articles
-  - time_article << r.date_created
+/ - @when_and_count_mention.each do |r|
+/   - data_article << r.count_articles
+/   - time_article << r.date_created
 
 
 #container
