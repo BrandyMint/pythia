@@ -14,6 +14,26 @@ class Article < ActiveRecord::Base
 
   after_create :extract_companies
 
+  def self.search_company_mention
+    articles = Article.all
+    articles.each do |article|
+      article.search_company_by_word
+    end
+  end
+
+
+  def search_company_by_word
+    text_article= self.title + " " + self.text
+    all_world = text_article.split(/\b/).select{ |word| word.size > 2 }
+    all_word.each do |word|
+      company = Company.company_by_word word
+      if company
+        CompanyMention.create :article_id => self.id, :company_id => company_id
+      end
+    end
+  end
+  
+  #to delete
   def extract_companies
     Company.all.each do |company|
       search_mention company

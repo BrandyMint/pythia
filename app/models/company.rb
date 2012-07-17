@@ -20,6 +20,14 @@ class Company < ActiveRecord::Base
   #   CompanyMention.get_mentions_by_company company
   # end
 
+  def self.company_by_word word
+    companies = Company.all
+    companies.each do |company|
+      return company if word == company #word.index company
+    end
+    false
+  end
+
   def self.update_companies
     companies = load_companies_from_icf_db
     update_info_about_companies companies
