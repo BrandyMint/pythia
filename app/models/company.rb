@@ -20,7 +20,7 @@ class Company < ActiveRecord::Base
   #   CompanyMention.get_mentions_by_company company
   # end
 
-  def self.company_by_word word
+  def self.search_by_word_by_word word
     companies = Company.all
     companies.each do |company|
       return company if word == company #word.index company
