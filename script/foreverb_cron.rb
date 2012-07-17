@@ -1,9 +1,13 @@
-require 'forever'
-# TODO move to ./script/
-Forever.run do
+#!/usr/bin/env ruby
 
-  every 30.minutes do
-     Feed::Rss.collect_articles
+Forever.run :fork => true do
+  before :each do
+    require '/config/boot' # here the rails/padrino environment
+  end
+
+  # update_articles
+  every 15.minutes do
+    Feed.last.collect_article #news.yandex
   end
 
 end

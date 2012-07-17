@@ -9,7 +9,7 @@
  
 - data_article = []
 - time_article = []
-- @company_data.each do |r| 
+- @article_time.each do |r| 
   - data_article << r.count_articles
   - time_article << r.date_created
 
@@ -20,7 +20,7 @@
   $(function () {
     var chart;
     var company_name = "#{@company.name}"
-    var company_data = [
+    var article_time = [
     #{ 
         data_article.map{ |i| "#{i}" }.join ', '
     }]
@@ -81,7 +81,7 @@
             },
             series: [{
                 name: company_name,
-                data: company_data 
+                data: article_time 
                      
             }]
         });

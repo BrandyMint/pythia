@@ -41,11 +41,11 @@ gem 'activeadmin'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem "nokogiri"
-gem "activerecord-postgresql-adapter"
+gem 'nokogiri'
+gem 'activerecord-postgresql-adapter'
 # gem "ruby-debug19"
-gem "debugger"
-gem "simple-rss"
+gem 'debugger'
+gem 'simple-rss'
 #gem 'mysql2', '< 0.3'
 gem 'mysql2' 
 gem 'mysql2_downcase'
@@ -55,12 +55,12 @@ gem 'foreverb'
 # gem  "activerecord-mysql2_downcase-adapter"
 
 gem 'sunspot_solr'
-gem "sunspot_rails"
+gem 'sunspot_rails'
 gem 'rsolr', :git => 'git://github.com/mwmitchell/rsolr.git'
 gem 'progress_bar'
 
 group :test, :development do
-  gem "sunspot-rails-tester"
+  gem 'sunspot-rails-tester'
 end
 
 group :test, :development do

@@ -3,7 +3,7 @@
 
 %p
   Число упоминанаий всего:
-  = @count_mention
+  = @count_all_mention
 
 Компании:
 %ul
@@ -11,11 +11,11 @@
     %li
       =link_to company.name, company
       (
-      = company.get_company_mention_count
+      = CompanyMention.get_mentions_by_company company
       )
 
-- all_mention  = @count_articles.values
-- time_mention = @count_articles.keys
+- count_mention  = @all_mention_in_days.values
+- date_mentions = @all_mention_in_days.keys
 
 
 #container
@@ -26,7 +26,7 @@
     var company_name = "Все статьи"
     var company_data = [
     #{ 
-        all_mention.map{ |i| "#{i}" }.join ', '
+        count_mention.map{ |i| "#{i}" }.join ', '
     }]
     
     
@@ -47,7 +47,7 @@
             xAxis: {
                 categories: [
                 "#{
-                    time_mention.map{ |i| "#{i}" }.join '", "'
+                    date_mentions.map{ |i| "#{i}" }.join '", "'
 
                 }"]
                 
