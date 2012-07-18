@@ -6,6 +6,24 @@ class Company < ActiveRecord::Base
   has_many :company_synonyms
   has_many :articles, :through => :company_mentions
 
+  def self.data_for_graph_company_mention_last_week
+    # пример данных  - переписать
+    # articles_last_week = Article.where('date_created > ?', 1.week.ago)
+    # date = 1.week.ago
+    # articles_last_week.each do |article|
+    #   data[date] = article.get_count_mention_for date
+    #   date += 1.day
+    # end
+    data = {
+            '11.01' => 4,
+            '12.01' => 5,
+            '13.01' => 15,
+            '14.01' => 25,
+            '15.01' => 55
+          }
+  end
+  
+
   def self.update_companies
     companies = CompanyIcf.all
     companies.each do |company|

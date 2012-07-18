@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
   has_many :companies, :through => :company_mentions
   belongs_to :feed
   
-  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))
+  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))  
   
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
@@ -31,4 +31,8 @@ class Article < ActiveRecord::Base
     CompanyMention.select('count(*)').group('article_id').all.count
   end
 
+  def self.get_count_mention_for day
+    # Получить количество упоминаний за текущий день
+    
+  end
 end
