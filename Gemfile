@@ -6,7 +6,7 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+# gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -23,7 +23,6 @@ end
 
 gem 'jquery-rails'
 gem 'activeadmin'
-#gem 'activeadmin'
 #gem 'sass-rails'
 #gem "meta_search",    '>= 1.1.0.pre'
 # To use ActiveModel has_secure_password
@@ -47,21 +46,21 @@ gem 'activerecord-postgresql-adapter'
 gem 'debugger'
 gem 'simple-rss'
 #gem 'mysql2', '< 0.3'
-gem 'mysql2' 
+gem 'mysql2'
 gem 'mysql2_downcase'
 gem 'url_validation'
 gem 'haml'
 gem 'foreverb'
 # gem  "activerecord-mysql2_downcase-adapter"
 
-gem 'sunspot_solr'
-gem 'sunspot_rails'
-gem 'rsolr', :git => 'git://github.com/mwmitchell/rsolr.git'
-gem 'progress_bar'
+# gem 'sunspot_solr'
+# gem 'sunspot_rails'
+# gem 'rsolr', :git => 'git://github.com/mwmitchell/rsolr.git'
+# gem 'progress_bar'
 
-group :test, :development do
-  gem 'sunspot-rails-tester'
-end
+# group :test, :development do
+#   gem 'sunspot-rails-tester'
+# end
 
 group :test, :development do
   gem 'rspec'
