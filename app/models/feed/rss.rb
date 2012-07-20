@@ -7,9 +7,17 @@ class Feed::Rss < Feed
       lenta.items.each do |msg|
         articles.create(:title => msg.title, :url => msg.link, :text => msg.description)
       end
-    rescue OpenURI::HTTPError
+    rescue OpenURI::HTTPError #and url.length > 255 
       puts "feed #{url} not avaible"
-    end    
+
+    rescue ActiveRecord::StatementInvalid
+      puts  "Article is not paramentr == url.length >255, title.length > 255"
+    end
   end
 
 end
+
+
+=begin
+   ActiveRecord::StatementInvalid: PG::Error: ERROR:  value too long for type character varying(255)
+=end

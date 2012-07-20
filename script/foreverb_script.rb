@@ -3,7 +3,7 @@ require File.expand_path('../../config/application', __FILE__)
 require 'forever'
 
 
-Forever.run :fork => true do
+Forever.run do#:fork => true do
 
   # dir  "foo"     # Default: File.expand_path('../../', __FILE__)
   # file "bar"     # Default: __FILE__
@@ -11,7 +11,7 @@ Forever.run :fork => true do
   # pid  "/tmp/foreverb_cron.pid" # Default: File.expand_path(dir, '/tmp/[file_name].pid')
 
   before :each do
-    # require '../config/boot' # here the rails/padrino environment
+    require '/home/eka/github/pythia/config/boot.rb'
   end
 
   # update_articles
