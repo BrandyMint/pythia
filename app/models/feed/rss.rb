@@ -16,8 +16,3 @@ class Feed::Rss < Feed
   end
 
 end
-
-
-=begin
-   ActiveRecord::StatementInvalid: PG::Error: ERROR:  value too long for type character varying(255)
-=end
