@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
-require File.expand_path('../../config/foreverb.rb', __FILE__)
+# require File.expand_path('../../config/foreverb', __FILE__)
+require 'Forever'
 
 Forever.run :fork=>true do
-  extend ForeverbConfig
-  init_foreverb_config 'foreverb-cron'
+  # extend ForeverbConfig
+  # init_foreverb_config 'foreverb-cron'
 
   before :each do
     Rake::Task['environment'].invoke
