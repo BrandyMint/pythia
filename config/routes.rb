@@ -1,4 +1,4 @@
-  Pythia::Application.routes.draw do
+Pythia::Application.routes.draw do
 
 
   ActiveAdmin.routes(self)
