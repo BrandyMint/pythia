@@ -34,8 +34,4 @@ class Article < ActiveRecord::Base
     CompanyMention.select('count(*)').group('article_id').all.count
   end
 
-  def self.get_count_mention_for day
-    # Получить количество упоминаний за текущий день
-    
-  end
 end

@@ -36,12 +36,12 @@ module ForeverbConfig
 
       puts 'Load rake tasks..'
       require 'rake'
-      BlogsInvestcafeRu::Application.load_tasks
+      Pythia::Application.load_tasks
 
 
       on_error do |e|
         puts "Boom raised: #{e.message}"
-        Airbrake.notify(e)
+        # Airbrake.notify(e)
       end
 
     end
