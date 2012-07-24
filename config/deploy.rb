@@ -1,17 +1,38 @@
 # -*- coding: utf-8 -*-
 
-namespace :vlad do
+# Деплой на личный тестовый
+#   rake vlad:deploy
+#
+# Деплой на продакшен
+#   rake vlad:deploy DEPLOY_TO=production
+#
 
-  set :application, "pythia"
+ENV['DEPLOY_TO'] ||= 'production'
+
+current_branch = `git branch 2>/dev/null | sed -e "/^\s/d" -e "s/^\*\s//"`.chomp || 'master'
+
+# puts "Текущая ветка #{current_branch}"
+
+namespace :vlad do
+  def skip_scm; false; end
+
+  set :application, "icfdev.ru"
+  set :project_name, "pythia"
+  set :rails_env, ENV['DEPLOY_TO'] || "icf"
 
   if ENV['DEPLOY_TO']=='production'
-    set :domain, "wwwdata@investcafe.ru"
-  else
-    set :domain, "wwwdata@icfdev.ru"
+    set :revision, 'origin/HEAD/production'
+    set :domain, "wwwdata@#{application}"
+  elsif ENV['DEPLOY_TO']=='stage'
+    set :revision, "origin/HEAD/#{current_branch}"
+    set :domain, "wwwdata@#{application}"
   end
 
-  set :deploy_to, "/home/wwwdata/pythia"
-  set :repository, 'git@github.com:investcafe/pythia.git'
+  set :deploy_to, "/home/wwwdata/#{project_name}"
+  set :keep_releases,	3
+  set :repository, "git@github.com:BrandyMint/#{project_name}.git"
+
+  set :rake_cmd, 'bundle exec rake'
 
   set :copy_files, [ 'config/database.yml' ]
   set :symlinks, copy_files
@@ -23,93 +44,68 @@ namespace :vlad do
     'bundle' => 'vendor/bundle'
   }
 
-  # set :unicorn_command, "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec unicorn"
+  set :unicorn_command, "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec unicorn"
 
-  desc 'Restart foreverb on icf'
+  desc "Put revision into public/revision"
+  remote_task :put_revision do
+    airbrake =  "cd #{current_release}; nohup bundle exec rake airbrake:deploy RAILS_ENV=#{rails_env} TO=#{rails_env} REVISION=#{revision} USER=`whoami` REPO=#{repository} >> ./tmp/airbrake_notify.log &"
+    # run "cd #{scm_path}/repo; git rev-parse HEAD > #{release_path}/public/revision; #{airbrake}"
+  end
+
+  desc 'Precompile assets'
+  remote_task :precompile do
+    puts "Precompile.."
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:clean tmp:clear assets:precompile"
+  end
+
+  desc 'Restart foreverb'
   remote_task :foreverb do
-    puts "Restart foreverb"
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec ./script/foreverb-cron 2>&1 >> /tmp/forever-restart.log &"
-    #run "cd #{current_path}; echo #{current_path}; RAILS_ENV=#{rails_env} bundle exec ./script/foreverb-cron"
+    puts "Foreverb.."
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec ./script/foreverb_script >> ./tmp/forever-restart.log"
   end
 
-  namespace :monit do
-    desc 'stop monitoring'
-    remote_task :stop do
-      # sudo "monit unmonitor all >> /tmp/monit.log"
-      # sudo "monit stop foreverb >> /tmp/monit.log"
+  namespace :unicorn do
+
+    remote_task :upgrade do
+      puts "Upgrade unicorn.."
+      sudo "/etc/init.d/unicorn upgrade"
+      puts "Unicorn upgraded"
     end
 
-    desc 'start monitoring'
-    remote_task :start do
-      puts "Start daemons.."
-      daemons = [:delayed_job, :foreverb, :mailman] # А зачем solr рестартовать?
-      # sudo "monit monitor all >> /tmp/monit.log"
-      daemons.each do |d|
-        sudo "monit restart #{d} >> /tmp/monit.log"
-      end
+    remote_task :restart do 
+      puts "Restart unicorn.."
+      sudo "/etc/init.d/unicorn restart"
+      puts "Unicorn restart"
     end
+
   end
 
-  desc 'Restart icf daemons'
-  remote_task :restart_icf_daemons do
-    puts "Restart daemons.."
-    # Rake::Task['vlad:foreverb'].invoke
-    # Rake::Task['vlad:delayed_job:restart'].invoke
-  end
-
-  desc 'Seed Courier subscriptions'
-  remote_task :seed_courier do
-    puts 'Seed courier subscriptions'
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec rake icf:seed:courier > /tmp/seed_courier.log 2>&1 &"
-  end
-
-  desc 'Load new db/templates and pages'
-  remote_task :load_templates_and_pages do
-    puts 'Load templates'
-    return # TODO Сделать так чтобы шаблоны измененные в базе не перезаписывались
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec rake icf:templates:load icf:pages:load notifications:load_message_templates icf:seed:courier FORCE=true >> /tmp/load_templates_and_pages.log &"
-  end
-
-  desc 'Cache Clear'
-  remote_task :cache_clear do
-    puts 'Cache Clear'
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake cache:clear"
-  end
-
-  if ENV['DEPLOY_TO']=='production'
-    set :deploy_tasks, %w[
-           vlad:describe
-           vlad:git_fetch
+   set :deploy_tasks, %w[
            vlad:update
            vlad:symlink
            vlad:bundle:install
            vlad:migrate
-           vlad:seed_courier
-           vlad:precompile
-           vlad:solr_reindex
-           vlad:monit:stop
-           vlad:unicorn:upgrade
-           vlad:monit:start
            vlad:put_revision
-           vlad:cache_clear
-           vlad:cleanup
-    ]
-  else
-    set :deploy_tasks, %w[
-           vlad:git_fetch
-           vlad:update
-           vlad:symlink
-           vlad:bundle:install
-           vlad:migrate
            vlad:precompile
-           vlad:monit:stop
            vlad:unicorn:upgrade
-           vlad:monit:start
-           vlad:put_revision
-           vlad:cache_clear
            vlad:cleanup
-    ]
-  end
+   ]
+
+
+   # Long story
+   #
+   #set :deploy_tasks, %w[
+           #vlad:update
+           #vlad:symlink
+           #vlad:bundle:install
+           #vlad:migrate
+           #vlad:put_revision
+           #vlad:foreverb
+           #vlad:precompile
+           #vlad:unicorn:upgrade
+           #vlad:delayed_job:restart
+           #vlad:cleanup
+   #]
 end
 
 

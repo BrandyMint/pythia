@@ -80,10 +80,10 @@ ActiveRecord::Schema.define(:version => 20120723060036) do
   create_table "feeds", :force => true do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "source_id",  :default => 0, :null => false
-    t.string   "type",                      :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "source_id",  :default => 0,            :null => false
+    t.string   "type",       :default => "Feeds::Rss", :null => false
   end
 
   create_table "sources", :force => true do |t|
