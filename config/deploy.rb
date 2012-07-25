@@ -76,6 +76,14 @@ namespace :vlad do
     run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake cache:clear"
   end
 
+  namespace :unicorn do
+    remote_task :upgrade do
+      puts "Upgrade unicorn.."
+      sudo "/etc/init.d/unicorn_pythia upgrade"
+      puts "Unicorn upgraded"
+    end
+  end
+
   if ENV['DEPLOY_TO']=='production'
     set :deploy_tasks, %w[
            vlad:describe
