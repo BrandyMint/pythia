@@ -1,100 +1,15 @@
-= javascript_include_tag 'highcharts', :debug => true
-= javascript_include_tag 'aplication', :debug => true
-
-%h2
-  КОМПАНИЯ - 
-  = @company.name
-%h3
-  Количество статей про 
-  = @company.name
-  &nbsp;&mdash;
-  = @count_publication
-  шт.
+%h2= @company.name
 
 %h3
-  Упоминания:
-- @company.articles.all.each do |article|
-  =link_to article.title, article.url
-  %p
-    =article.text
- 
-- data_article = []
-- time_article = []
-/ - @when_and_count_mention.each do |r|
-/   - data_article << r.count_articles
-/   - time_article << r.date_created
+  Упоминания (#{@company.company_mentions.count})
+  %ul
+    - @company.company_mentions.each do |cm|
+        %li= link_to cm
 
+%h3
+  Статьи (#{@company.articles.count})
+  %ul
+    - @company.articles.each do |a|
+      %li= link_to a
 
-#container
-
-:javascript
-  $(function () {
-    var chart;
-    var company_name = "#{@company.name}"
-    var article_time = [
-    #{ 
-        data_article.map{ |i| "#{i}" }.join ', '
-    }]
-    
-    
-
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                type: 'area'
-            },
-            title: {
-                text: 'График упоминания - '+ company_name + ''
-            },
-            subtitle: {
-                text: 'Source: <a href="http://ya.ru">'+
-                    'Подтекст</a>'
-            },
-            xAxis: {
-                categories: [
-                "#{
-                    time_article.map{ |i| "#{i}" }.join '", "'
-
-                }"]
-                
-            },
-            yAxis: {
-                title: {
-                    text: 'Число упоминаний'
-                },
-                labels: {
-                    formatter: function() {
-                        return this.value;
-                    }
-                }
-            },
-            tooltip: {
-                formatter: function() {
-                    return this.series.name +' produced <b>'+
-                        Highcharts.numberFormat(this.y, 0) +'</b><br/>warheads in '+ this.x;
-                }
-            },
-            plotOptions: {
-                area: {
-                    pointStart:0,
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle',
-                        radius: 2,
-                        states: {
-                            hover: {
-                                enabled: true
-                            }
-                        }
-                    }
-                }
-            },
-            series: [{
-                name: company_name,
-                data: article_time 
-                     
-            }]
-        });
-    });  
-  });  
+-# = render :partial => 'graphic'

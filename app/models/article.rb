@@ -14,6 +14,10 @@ class Article < ActiveRecord::Base
 
   after_create :search_and_create_companies_mentions
 
+  def to_s
+    title
+  end
+
   def search_and_create_companies_mentions
     words.each do |word|
       company = Company.search_by_word word

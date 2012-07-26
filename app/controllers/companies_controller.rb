@@ -8,8 +8,6 @@ class CompaniesController < ApplicationController
   
   def show
     @company = Company.find params[:id]
-    @count_publication = @company.count_publication
-    @when_and_count_mention= @company.when_and_count_mention
   end
 
 end
