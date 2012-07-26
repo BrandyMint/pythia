@@ -70,19 +70,7 @@ namespace :vlad do
     run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec rake icf:templates:load icf:pages:load notifications:load_message_templates icf:seed:courier FORCE=true >> /tmp/load_templates_and_pages.log &"
   end
 
-  desc 'Cache Clear'
-  remote_task :cache_clear do
-    puts 'Cache Clear'
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake cache:clear"
-  end
-
-  namespace :unicorn do
-    remote_task :upgrade do
-      puts "Upgrade unicorn.."
-      sudo "/etc/init.d/unicorn_pythia upgrade"
-      puts "Unicorn upgraded"
-    end
-  end
+  set :unicorn_rc, "/etc/init.d/unicorn_pythia"
 
   if ENV['DEPLOY_TO']=='production'
     set :deploy_tasks, %w[
@@ -111,8 +99,6 @@ namespace :vlad do
            vlad:migrate
            vlad:precompile
            vlad:unicorn:upgrade
-           vlad:put_revision
-           vlad:cache_clear
            vlad:cleanup
     ]
   end
