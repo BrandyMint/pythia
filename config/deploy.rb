@@ -1,15 +1,6 @@
 # -*- coding: utf-8 -*-
 
 namespace :vlad do
-
-  set :application, "pythia"
-
-  if ENV['DEPLOY_TO']=='production'
-    set :domain, "wwwdata@investcafe.ru"
-  else
-    set :domain, "wwwdata@icfdev.ru"
-  end
-
   set :deploy_to, "/home/wwwdata/pythia"
   set :repository, 'git@github.com:investcafe/pythia.git'
 
@@ -92,7 +83,6 @@ namespace :vlad do
     ]
   else
     set :deploy_tasks, %w[
-           vlad:git_fetch
            vlad:update
            vlad:symlink
            vlad:bundle:install
