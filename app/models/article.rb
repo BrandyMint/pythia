@@ -17,7 +17,7 @@ class Article < ActiveRecord::Base
   def search_and_create_companies_mentions
     words.each do |word|
       company = Company.search_by_word word
-      company_mentions.create :company_id => company_id if company
+      company_mentions.create :company_id => company.id if company
     end
   end
   

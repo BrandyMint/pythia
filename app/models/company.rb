@@ -39,9 +39,13 @@ class Company < ActiveRecord::Base
   def self.search_by_word word
     companies = Company.all
     companies.each do |company|
-      return company if word == company #word.index company
+      return company if company.name_compare word
     end
     false
+  end
+
+  def name_compare word
+    word.to_s.mb_chars.upcase.index self.name.to_s.mb_chars.upcase
   end
 
   def get_mentions_by_article article

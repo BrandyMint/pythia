@@ -5,4 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Feed::Rss.create(:name=>:yandex, :url=>'http://news.yandex.ru/business.rss')
+
+# Source.create :name => :SubscriberRu, :url => 'http://ya.ru', :type => 'Source::SoubscriberRu'
+Feed::Rss.create :name=>:yandex, :url=>'http://news.yandex.ru/business.rss'
