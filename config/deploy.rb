@@ -110,9 +110,7 @@ namespace :vlad do
            vlad:bundle:install
            vlad:migrate
            vlad:precompile
-           vlad:monit:stop
            vlad:unicorn:upgrade
-           vlad:monit:start
            vlad:put_revision
            vlad:cache_clear
            vlad:cleanup
