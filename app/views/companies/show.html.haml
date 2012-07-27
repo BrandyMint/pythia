@@ -4,8 +4,8 @@
   Упоминания (#{@company.company_mentions.count})
   %ul
     - @company.company_mentions.each do |cm|
-        %li= link_to cm
-
+      %li= link_to cm
+      
 %h3
   Статьи (#{@company.articles.count})
   %ul

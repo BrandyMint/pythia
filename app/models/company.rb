@@ -45,7 +45,8 @@ class Company < ActiveRecord::Base
   end
 
   def name_compare word
-    word.to_s.mb_chars.upcase.index self.name.to_s.mb_chars.upcase
+    # word.to_s.mb_chars.upcase.index self.name.to_s.mb_chars.upcase
+    word.to_s.mb_chars.upcase == self.name.to_s.mb_chars.upcase
   end
 
   def get_mentions_by_article article
@@ -76,4 +77,7 @@ class Company < ActiveRecord::Base
     company_mentions.select("count(*)").where('company_id = ?', self.id).group('article_id').all.count
   end
 
+  def to_s
+    self.name
+  end
 end

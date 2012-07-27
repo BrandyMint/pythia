@@ -27,6 +27,7 @@ class Article < ActiveRecord::Base
   
   def words
    text_article= self.title + " " + self.text
+   # TODO выделять "Сбербанк" => Сбербанк
    @words ||= text_article.split(/\b/).select{ |word| word.size > 2 } 
   end
 

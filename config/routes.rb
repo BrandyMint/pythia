@@ -1,11 +1,18 @@
 Pythia::Application.routes.draw do
 
 
+  # get "company_mention/index"
+
+  # get "company_mention/show"
+  resources :company_mention, :only => [:index, :show], as: 'company_mention'
+
   ActiveAdmin.routes(self)
 
   root :to => "wellcome#index"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
+  # Sample resource route with sub-resources:
+  resources :companies
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -33,8 +40,6 @@ Pythia::Application.routes.draw do
   #     end
   #   end
 
-  # Sample resource route with sub-resources:
-  resources :companies
 
   # Sample resource route with more complex sub-resources
   #   resources :products do

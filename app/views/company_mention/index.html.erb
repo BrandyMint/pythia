@@ -1,0 +1,9 @@
+<% @company_mentions.each do |cm| %>
+  <li>
+    <ul>    
+      <%= link_to(Company.find(cm.company_id), company_path(cm.company_id)) %> =
+          <%= Article.find cm.article_id %>
+          <%= link_to "Показать", cm %>
+    </ul>
+  </li>
+<% end %>
