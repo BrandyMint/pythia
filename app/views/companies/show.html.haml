@@ -7,9 +7,10 @@
       %li= link_to cm, cm
       
 %h3
-  Статьи (#{@company.articles.count})
+  - @collect_article = @company.articles.uniq
+  Статьи (#{@collect_article.count})
   %ul
-    - @company.articles.each do |a|
-      %li= link_to a
-
+    - @collect_article.each do |a|
+      %li= link_to a.title, a.url
+hi
 = render :partial => 'graphic'
