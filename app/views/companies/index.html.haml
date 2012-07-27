@@ -1,12 +1,6 @@
 = javascript_include_tag 'highcharts', :debug => true
 = javascript_include_tag 'aplication', :debug => true
 
-%p
-  Всего статьей:
-  = @count_all_article
-  Из них есть упоминаний по компаниям:
-  = Article.count_company_mentions
-
 Компании:
 %ul
   -@companies.each do |company|
