@@ -39,4 +39,12 @@ class Article < ActiveRecord::Base
     CompanyMention.select('count(*)').group('article_id').all.count
   end
 
+  def self.reload_company_mention
+    CompanyMention.delete_all
+    articles = Article.all
+    articles.each do |article|
+      article.search_and_create_companies_mentions
+    end
+  end
+  
 end
