@@ -19,8 +19,8 @@ namespace :vlad do
   desc 'Restart foreverb on icf'
   remote_task :foreverb do
     puts "Restart foreverb"
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec ./script/foreverb-cron 2>&1 >> /tmp/forever-restart.log &"
-    #run "cd #{current_path}; echo #{current_path}; RAILS_ENV=#{rails_env} bundle exec ./script/foreverb-cron"
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec ./script/foreverb_script 2>&1 >> /tmp/forever-restart.log &"
+    #run "cd #{current_path}; echo #{current_path}; RAILS_ENV=#{rails_env} bundle exec ./script/foreverb_script"
   end
 
   namespace :monit do
