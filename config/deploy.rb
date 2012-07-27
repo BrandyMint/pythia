@@ -90,6 +90,7 @@ namespace :vlad do
            vlad:precompile
            vlad:unicorn:upgrade
            vlad:cleanup
+           vlad:foreverb
     ]
   end
 end
