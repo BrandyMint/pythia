@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'forever'
+
+Forever.run do
+  every 10.second do
+    puts 'hello'
+  end
+end
