@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
+require File.expand_path('../../config/application', __FILE__)
 require 'forever'
 
+Pythia::Application.load_tasks
+
 Forever.run do
+  before :each do
+    Rake::Task['environment'].invoke
+  end
+
   every 10.second do
-    puts 'hello'
+    puts Article.first.title
   end
 end
