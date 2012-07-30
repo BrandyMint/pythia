@@ -1,1 +1,8 @@
-#TODO: сбор статьей через каждый 15(30) минут
+#!/usr/bin/env ruby
+require 'forever'
+
+Forever.run do
+  every 10.second do
+    puts 'hello'
+  end
+end
