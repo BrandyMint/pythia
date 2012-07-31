@@ -10,6 +10,6 @@ Forever.run do
   end
 
   every 10.minute do
-    Feed.last.collect_articles
+    Feed.find_each { |feed| feed.collect_articles}
   end
 end

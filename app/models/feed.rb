@@ -9,7 +9,7 @@ class Feed < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   validates :url, :presence => true, :uniqueness => true, :url => true
 
-  def collect_artricles
+  def collect_articles
     raise "not implemented"
   end
 
