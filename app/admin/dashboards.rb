@@ -1,4 +1,16 @@
 ActiveAdmin::Dashboards.build do
+  section "Statistic:" do
+    strong {link_to "Article: #{Article.count}", admin_articles_path}
+    strong {link_to "Company_menton: #{CompanyMention.count}", admin_company_mentions_path}
+  end
+
+  section "Article" do
+    table_for Article.order("created_at desc").limit(5) do
+      column :title
+      column :created_at
+    end
+    strong { link_to "View All Products", admin_articles_path }
+  end
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just

@@ -1,18 +1,9 @@
 Как установить pythia
 =====================
 
-Нужно иметь:
 > git, rvm, rails, postresql
 
-* Устанавливаем git
-
-`sudo apt-get install git`
-
-* (RVM) [http://rvm.io]
-
-* Выкачиваем с гитхаба проект
-
-`git clone ... `
+`git clone  `
 
 `cd pythia`
 
@@ -20,8 +11,20 @@
 
 `bundle`
 
-Устанавливаем postreqsl
+вылетело с ошибкой на pg? 
 
-`apt-get install postsql-X.X`D
+Тогда:
 `apt-get install postsql-dev-X.X`
 `gem install pg -- --with-pg-config='/usr/bin/pg_config'`
+
+
+* rake db:create
+* rake db:migrate
+* rake db:seed
+
+Далее обновить компании (в консоли `rails c`)
+  
+  `Company.update_companies`
+
+Запустить foreverb (cron для руби):
+  `./script/foreverb-cron`

@@ -10,6 +10,11 @@ class CompanyMention < ActiveRecord::Base
 
   scope :by_company, lambda { |company| where :company_id=>company.id }
   scope :by_article, lambda { |article| where :article_id=>article.id }
+  scope :get_article, select('count(*)').group('article_id')
+
+  def self.count_article
+    self.get_article.all.count 
+  end
 
   def to_s
     (Article.find self.article_id).title

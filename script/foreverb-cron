@@ -9,7 +9,7 @@ Forever.run do
     Rake::Task['environment'].invoke
   end
 
-  every 10.second do
-    puts Article.first.title
+  every 10.minute do
+    Feed.last.collect_articles
   end
 end

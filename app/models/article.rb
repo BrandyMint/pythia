@@ -7,16 +7,12 @@ class Article < ActiveRecord::Base
   has_many :companies, :through => :company_mentions
   belongs_to :feed
   
-  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))  
-  
+  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))
+
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
 
   after_create :search_and_create_companies_mentions
-
-  def to_s
-    title
-  end
 
   def search_and_create_companies_mentions
     words.each do |word|
@@ -47,4 +43,8 @@ class Article < ActiveRecord::Base
     end
   end
   
+  def to_s
+    title
+  end
+
 end

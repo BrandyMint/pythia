@@ -3,5 +3,5 @@
 
   * url `\admin`
 
-`User: admin@example.com`
+`User: admin@example.com` or `user@icfdev.ru`
 `Password: password`
