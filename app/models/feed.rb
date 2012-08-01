@@ -10,7 +10,12 @@ class Feed < ActiveRecord::Base
   validates :url, :presence => true, :uniqueness => true, :url => true
 
   def collect_articles
+    logger.error "FEED not emplementation method 'collect_articles'. \
+        Possibility 'feed' field 'type' is erroneous."
     raise "not implemented"
   end
 
+  def to_s
+    self.name
+  end
 end

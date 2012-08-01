@@ -23,7 +23,6 @@ class Article < ActiveRecord::Base
   
   def words
    text_article= self.title + " " + self.text
-   # TODO выделять "Сбербанк" => Сбербанк
    @words ||= text_article.split(/\b/).select{ |word| word.size > 2 } 
   end
 
@@ -47,4 +46,8 @@ class Article < ActiveRecord::Base
     title
   end
 
+  def self.get_mention_by_day day
+    # Возращает число упоминаний в текущий день
+    CompanyMention.select("count(*) as count_mention, created_at as date_created").group('created_at').having('date(created_at) = date(?)', day.to_s(:db)).all.count
+  end
 end

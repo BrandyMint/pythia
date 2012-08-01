@@ -12,6 +12,14 @@ ActiveAdmin::Dashboards.build do
     strong { link_to "View All Products", admin_articles_path }
   end
 
+  section "Company mentions" do
+    data = CompanyMention.get_count_articles_by_range(start_day: 1.week.ago, stop_day: Date.today)
+    data.each do |key, value|
+      div{"#{key} = #{value}"}
+    end
+    # strong {"out"}
+
+  end
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.

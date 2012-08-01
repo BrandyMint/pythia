@@ -19,4 +19,33 @@ class CompanyMention < ActiveRecord::Base
   def to_s
     (Article.find self.article_id).title
   end
+
+  def self.get_count_articles_by_range range
+    # range = {:start_day => 1.week.ago, :stop_day => 1.day.ago}
+    start_day = set_day range[:start_day]
+    stop_day = set_day range[:stop_day]
+    if start_day > stop_day
+      start_day, stop_day = [stop_day, start_day]
+    end
+    
+    day = start_day
+    result = {}
+    while day < stop_day
+      count_article = Article.get_mention_by_day day
+      result[day] = count_article
+      day += 1.day
+    end
+    result
+  end
+
+private
+
+  def self.set_day day
+    now_date= Date.today
+    if day > now_date
+      day = now_date
+    end
+    day
+  end
+
 end
