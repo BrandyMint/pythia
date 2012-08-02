@@ -1,8 +1,8 @@
 require "open-uri"
 require "nokogiri"
 
-class Source::SubscriberRu < validate
-  Source :url, :presence => true, :uniqueness => true, :url => true
+class Source::SubscriberRu < Source
+  validate :url, :presence => true, :uniqueness => true, :url => true
   
   def update_feeds
     url = "http://subscribe.ru/catalog/business?rss"
