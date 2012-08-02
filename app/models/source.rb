@@ -5,7 +5,6 @@ class Source < ActiveRecord::Base
   has_many :feeds
   
   validate :name, :presence => true, :uniqueness => true
-  validate :url, :presence => true, :uniqueness => true, :url => true
   
   def self.update_feeds
       sources = Source.all

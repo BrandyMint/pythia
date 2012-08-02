@@ -8,6 +8,7 @@ class Feed < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => true
   validates :url, :presence => true, :uniqueness => true, :url => true
+  validates :source_id, :presence => true
 
   def collect_articles
     logger.error "FEED not emplementation method 'collect_articles'. \
