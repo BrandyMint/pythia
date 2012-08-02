@@ -21,19 +21,17 @@ class CompanyMention < ActiveRecord::Base
   end
 
   def self.get_count_articles_by_range range
-    # range = {:start_day => 1.week.ago, :stop_day => 1.day.ago}
     start_day = set_day range[:start_day]
     stop_day = set_day range[:stop_day]
     if start_day > stop_day
       start_day, stop_day = [stop_day, start_day]
     end
     
-    day = start_day
     result = {}
-    while day < stop_day
+    days = [start_day, stop_day]
+    days.each do |day|
       count_article = Article.get_mention_by_day day
       result[day] = count_article
-      day += 1.day
     end
     result
   end
@@ -41,7 +39,7 @@ class CompanyMention < ActiveRecord::Base
 private
 
   def self.set_day day
-    now_date= Date.today
+    now_date = Date.today
     if day > now_date
       day = now_date
     end

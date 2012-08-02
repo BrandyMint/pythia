@@ -14,10 +14,9 @@ ActiveAdmin::Dashboards.build do
 
   section "Company mentions" do
     data = CompanyMention.get_count_articles_by_range(start_day: 1.week.ago, stop_day: Date.today)
-    data.each do |key, value|
-      div{"#{key} = #{value}"}
+    data.each do |day, count_article|
+      div{"#{day.to_date} = #{count_article}"}
     end
-    # strong {"out"}
 
   end
   # Define your dashboard sections here. Each block will be
