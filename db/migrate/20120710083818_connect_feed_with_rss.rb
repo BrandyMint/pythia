@@ -1,7 +1,7 @@
 class ConnectFeedWithRss < ActiveRecord::Migration
   def up
     change_table :feeds do |t|
-      t.string :type, :null => false
+      t.string :type
     end
     # Feed.update_all ["type = ?", "Feed::Rss"]
   end

@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20120723060036) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.integer  "source_id",  :default => 0, :null => false
-    t.string   "type",                      :null => false
+    t.string   "type"
   end
 
   create_table "sources", :force => true do |t|

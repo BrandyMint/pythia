@@ -1,7 +1,11 @@
+# coding: utf-8
 class DeleteTimeAddFromCompanyMention < ActiveRecord::Migration
-  def change
-    change_table :company_mentions do |t|
-      t.remove :time_add
-    end
+
+  def up
+    remove_column :company_mentions, :time_add
+  end
+
+  def down
+    add_column :company_mentions, :time_add, :integer
   end
 end
