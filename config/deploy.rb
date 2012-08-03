@@ -16,7 +16,7 @@ namespace :vlad do
 
   # set :unicorn_command, "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec unicorn"
 
-  desc 'Restart foreverb on icf'
+  desc "Restart foreverb on #{rails_env}"
   remote_task :foreverb do
     puts "Restart foreverb"
     run "cd #{current_path}; RAILS_ENV=#{rails_env} nohup bundle exec ./script/foreverb_script 2>&1 >> /tmp/forever-restart.log &"
@@ -41,7 +41,7 @@ namespace :vlad do
     end
   end
 
-  desc 'Restart icf daemons'
+  desc "Restart #{rails_env} daemons"
   remote_task :restart_icf_daemons do
     puts "Restart daemons.."
     # Rake::Task['vlad:foreverb'].invoke

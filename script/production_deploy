@@ -11,4 +11,4 @@ case $1 in
     ;;
 esac
 
-BUNDLE_GEMFILE=./script/vlad/Gemfile rake -N -f ./script/vlad/Rakefile vlad:deploy to=icf GIT_BRANCH=$git_branch
+BUNDLE_GEMFILE=./script/vlad/Gemfile rake -N -f ./script/vlad/Rakefile vlad:deploy to=production GIT_BRANCH=$git_branch

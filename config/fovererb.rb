@@ -41,7 +41,7 @@ module ForeverbConfig
 
       on_error do |e|
         puts "Boom raised: #{e.message}"
-        # Airbrake.notify(e)
+        Airbrake.notify(e)
       end
 
     end
