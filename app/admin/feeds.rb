@@ -23,7 +23,7 @@ ActiveAdmin.register Feed do
     column :name
     column :type
     column :url
-    column :source
+    column :source_id
   end  
 
 end
