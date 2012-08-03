@@ -4,7 +4,7 @@ Pythia::Application.routes.draw do
   # get "company_mention/index"
 
   # get "company_mention/show"
-  resources :company_mention, :only => [:index, :show], as: 'company_mention'
+  resources :company_mention, :only => [:index, :show], as: 'company_mentions'
 
   ActiveAdmin.routes(self)
 

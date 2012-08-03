@@ -1,0 +1,6 @@
+= link_to "Pythia", root_path, :class => 'brand'
+
+= bootstrap_navigation :type=>'' do |nav|
+  - nav.link_to 'Компании', companies_path
+  - nav.link_to  'Упоминания', company_mentions_path
+  - nav.link_to 'Управление', admin_dashboard_path
