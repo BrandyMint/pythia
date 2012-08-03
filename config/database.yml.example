@@ -46,3 +46,21 @@ test:
   pool: 5
   username:
   password:
+
+
+# for remote database
+icfdedb_development:
+  adapter: mysql2_downcase
+  charset: cp1251
+  collation: cp1251_general_ci
+  reconnect: false
+  database: kamin_icf1
+  username: root
+
+icfdedb_test:
+  adapter: mysql2_downcase
+  charset: cp1251
+  collation: cp1251_general_ci
+  reconnect: false
+  database: kamin_icf1
+  username: root
