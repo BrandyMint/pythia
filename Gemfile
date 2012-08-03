@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+gem "airbrake"
 
-gem 'rails', '3.2.3'
+gem 'rails', '~> 3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -46,6 +47,7 @@ gem 'activerecord-postgresql-adapter'
 gem 'debugger'
 gem 'simple-rss'
 #gem 'mysql2', '< 0.3'
+gem 'pg'
 gem 'mysql2'
 gem 'mysql2_downcase'
 gem 'url_validation'
