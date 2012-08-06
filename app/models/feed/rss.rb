@@ -3,7 +3,9 @@ require 'open-uri'
 class Feed::Rss < Feed
 
   before_validation do
+    puts "Feed:validate #{url}"
     self.source ||= Source.find_by_name 'manual'
+    debugger
     self.name ||= dom.title
   end
 
