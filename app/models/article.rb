@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
 
   attr_accessible :title, :text, :url, :original_id
 
-  belongs_to :original, :class_name => 'Article', :counter_cache => true
+  belongs_to :original, :class_name => 'Article', :counter_cache => :duplicates_count
   belongs_to :feed, :counter_cache => true
 
   has_many :company_mentions
