@@ -23,6 +23,6 @@ ActiveAdmin.register Source do
     column :name
     column :type
     column :url
-  end  
+  end
 
 end
