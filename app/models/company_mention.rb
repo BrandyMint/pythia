@@ -12,6 +12,12 @@ class CompanyMention < ActiveRecord::Base
   scope :by_article, lambda { |article| where :article_id=>article.id }
   scope :get_article, select('count(*)').group('article_id')
 
+
+  def self.get_mention_by_day day
+    # Возращает число упоминаний в текущий день
+    CompanyMention.select("count(*) as count_mention, created_at as date_created").group('created_at').having('date(created_at) = date(?)', day.to_s(:db)).all.count
+  end
+
   def self.count_article
     self.get_article.all.count 
   end
