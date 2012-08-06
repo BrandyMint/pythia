@@ -14,7 +14,11 @@ class Feed::Rss < Feed
   def collect_articles
     begin
       dom.items.each do |msg|
-        articles.create :title => msg.title, :url => msg.link, :text => msg.description
+        articles.create :title => msg[:title],
+              :url => msg[:link],
+              :text => msg[:description],
+              :guid => msg[:guid] #,
+              # :perma_link => msg[:guid].isPermaLink="true"
       end
 
       self.touch
@@ -24,5 +28,4 @@ class Feed::Rss < Feed
       raise err
     end
   end
-
 end

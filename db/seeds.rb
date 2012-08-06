@@ -32,3 +32,4 @@ Feed::Rss.create url: "http://expert.ru/doc-list/rss/?tags=3", name: 'expert-bis
 Feed::Rss.create url: "http://www.ng.ru/ng.rss", name: 'indemedents gazeta'
 Feed::Rss.create url: "http://www.rg.ru/xml/index.xm", name: 'rg'
 Feed::Rss.create url: "http://www.fontanka.ru/fontanka.rss", name: 'fontanka'
+Feed::Rss.create url: "http://www.bbc.co.uk/russian/index.xml", name: 'test atom'

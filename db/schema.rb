@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806100115) do
+ActiveRecord::Schema.define(:version => 20120806102339) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20120806100115) do
     t.integer  "feed_id",                         :null => false
     t.integer  "original_id"
     t.integer  "duplicates_count", :default => 0, :null => false
+    t.string   "perma_link"
+    t.string   "guid"
   end
 
   create_table "companies", :force => true do |t|
