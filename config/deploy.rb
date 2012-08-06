@@ -14,6 +14,7 @@ namespace :vlad do
            vlad:unicorn:upgrade
            vlad:put_revision
            vlad:cleanup
+           vlad:delayed_job:restart
     ]
 end
 
