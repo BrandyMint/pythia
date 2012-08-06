@@ -24,15 +24,6 @@ require 'bundler/setup'
 
 
 if rails_env=='production'
-  worker_processes 10
-  working_directory APP_PATH + "current"
-
-  listen APP_PATH + "shared/tmp/unicorn.sock", :backlog => 64
-  # listen "/tmp/.sock", :backlog => 64
-  pid APP_PATH + "shared/pids/unicorn.pid"
-  stderr_path APP_PATH + "shared/log/unicorn.stderr.log"
-  stdout_path APP_PATH + "shared/log/unicorn.stdout.log"
-elsif rails_env=='stage'
   worker_processes 3
   working_directory APP_PATH + "current"
 
