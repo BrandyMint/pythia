@@ -42,7 +42,7 @@ namespace :vlad do
   end
 
   desc "Restart #{rails_env} daemons"
-  remote_task :restart_icf_daemons do
+  remote_task :restart_daemons do
     puts "Restart daemons.."
     # Rake::Task['vlad:foreverb'].invoke
     # Rake::Task['vlad:delayed_job:restart'].invoke

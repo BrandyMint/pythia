@@ -32,7 +32,7 @@ if rails_env=='production'
   pid APP_PATH + "shared/pids/unicorn.pid"
   stderr_path APP_PATH + "shared/log/unicorn.stderr.log"
   stdout_path APP_PATH + "shared/log/unicorn.stdout.log"
-elsif rails_env=='icf'
+elsif rails_env=='stage'
   worker_processes 3
   working_directory APP_PATH + "current"
 
