@@ -1,7 +1,7 @@
 # coding: utf-8
 class Article < ActiveRecord::Base
   
-  attr_accessible :title, :text, :url
+  attr_accessible :title, :text, :url, :original_article
   
   has_many :company_mentions
   has_many :companies, :through => :company_mentions
@@ -49,5 +49,31 @@ class Article < ActiveRecord::Base
   def self.get_mention_by_day day
     # Возращает число упоминаний в текущий день
     CompanyMention.select("count(*) as count_mention, created_at as date_created").group('created_at').having('date(created_at) = date(?)', day.to_s(:db)).all.count
+  end
+
+  def self.mark_article_dublicate
+    # todo: протестировать
+    articles = Article.all
+    articles.each do |article|
+      article_dublicate = article.find_dublicate article
+      if article_dublicate #and original_article != id. TODO: move to find_dublicate
+        if article_dublicate.created_at > article.created_at
+          article_dublicate.original_article = article.id
+        else 
+          article.original_article = article_dublicate.id
+        end
+      end
+    end
+    
+  end
+
+  def find_dublicate possibility_dublicate_article
+    # todo протестировать
+    articles = Article.all
+    articles.each do |article|
+      return article if article.title == possibility_dublicate_article.title &&
+        article.text == possibility_dublicate_article.text
+    end
+    nil
   end
 end
