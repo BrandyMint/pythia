@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
 
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
-  validates :guid, :presence => true, :url => true
+  validates :guid, :presence => true
 
   before_create do
     self.original = Article.find_original self
