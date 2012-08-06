@@ -1,7 +1,7 @@
 # coding: utf-8
 ActiveAdmin.register Feed do
   index do
-    column :source
+    column :source, :sortable => false
     column :name
     column :url
     column :articles_count do |feed|

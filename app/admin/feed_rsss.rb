@@ -4,7 +4,7 @@ ActiveAdmin.register Feed::Rss do
 
   member_action :collect do
     feed = Feed.find params[:id]
-    feed.collect_articles
+    feed.delay.collect_articles
 
     redirect_to( {:action => :show}, {:notice => "Collected!"} )
   end
