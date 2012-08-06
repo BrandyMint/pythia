@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806082038) do
+ActiveRecord::Schema.define(:version => 20120806100115) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(:version => 20120806082038) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
-    t.string   "url",           :null => false
-    t.text     "text",          :null => false
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "feed_id",       :null => false
-    t.integer  "company_id_id"
+    t.string   "url",                             :null => false
+    t.text     "text",                            :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "feed_id",                         :null => false
     t.integer  "original_id"
+    t.integer  "duplicates_count", :default => 0, :null => false
   end
 
   create_table "companies", :force => true do |t|
@@ -81,10 +81,11 @@ ActiveRecord::Schema.define(:version => 20120806082038) do
   create_table "feeds", :force => true do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "source_id",  :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "source_id",      :default => 0, :null => false
     t.string   "type"
+    t.integer  "articles_count", :default => 0, :null => false
   end
 
   add_index "feeds", ["url"], :name => "index_feeds_on_url", :unique => true

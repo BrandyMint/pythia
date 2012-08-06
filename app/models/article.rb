@@ -3,15 +3,15 @@ class Article < ActiveRecord::Base
 
   attr_accessible :title, :text, :url, :original_id
 
+  belongs_to :original, :class_name => 'Article', :counter_cache => true
+  belongs_to :feed, :counter_cache => true
+
   has_many :company_mentions
   has_many :companies, :through => :company_mentions
   has_many :duplicates, :foreign_key => :original_id, :class_name => 'Article'
 
-  belongs_to :original, :class_name => 'Article'
-
-  belongs_to :feed
-
-  scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))
+  scope :last_days, lambda { |days| where('created_at >= current_date - ?', days) }
+  scope :last_week, last_days(7)
 
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
@@ -39,7 +39,7 @@ class Article < ActiveRecord::Base
     def find_original sample
       Article.find_each do |article|
         # TODO улучшить механизм поиска оригинала
-        return article if article.title == sample.title and article.text == sample.text or article.perma_link == sample.perma_link
+        return article if article.title == sample.title and article.text == sample.text
       end
       nil
     end
