@@ -4,25 +4,22 @@ require 'feedzirra'
 class Feed::Rss < Feed
 
   before_validation do
-    # puts "Feed:validate #{url}"
-    # self.source ||= Source.find_by_name 'manual'
-    # self.name ||= dom.title
-    # переписать!
-    lenta  = Feedzirra::Feed.fetch_and_parse(url)
-    self.name = lenta.title
+    puts "Feed:validate #{url}"
+    self.source ||= Source.find_by_name 'manual'
+    self.name ||= feed.try :title
+  end
 
+  def feed
+    @feed ||= Feedzirra::Feed.fetch_and_parse(url)
   end
 
   def collect_articles
-    lenta = Feedzirra::Feed.fetch_and_parse(url)
-    self.name = lenta.title
-    if lenta
-      lenta.entries.each do |msg|
-        articles.create(:title => msg.title, :url => msg.url, :text => msg.summary, :guid => msg.entry_id)
+    begin
+      feed.entries.each do |entity|
+        articles.create :title => entity.title, :url => entity.url, :text => entity.summary, :guid => entity.id
       end
       self.touch
-    else
-      puts "404 #{url}"
+    rescue
     end
   end
 end
