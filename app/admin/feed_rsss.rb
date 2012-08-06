@@ -11,6 +11,7 @@ ActiveAdmin.register Feed::Rss do
 
   #action_item :only => :show do
   action_item :only => :show do
+    # TODO: браузер "зависает" во время выполнения
     link_to 'Собрать статьи', collect_admin_feed_rss_path(feed_rss)
   end
 

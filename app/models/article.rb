@@ -1,7 +1,7 @@
 # coding: utf-8
 class Article < ActiveRecord::Base
 
-  attr_accessible :title, :text, :url, :original_id
+  attr_accessible :title, :text, :url, :original_id, :guid, :perma_link
 
   has_many :company_mentions
   has_many :companies, :through => :company_mentions
@@ -15,6 +15,7 @@ class Article < ActiveRecord::Base
 
   validates :text, :presence => true
   validates :url, :presence => true, :url => true
+  validates :guid, :presence => true, :url => true
 
   before_create do
     self.original = Article.find_original self
@@ -34,12 +35,12 @@ class Article < ActiveRecord::Base
         article.search_and_create_companies_mentions
       end
     end
-
+      
     # Ищет в базе оригинальную статью по примеру
     def find_original sample
       Article.find_each do |article|
         # TODO улучшить механизм поиска оригинала
-        return article if article.title == sample.title and article.text == sample.text or article.perma_link == sample.perma_link
+        return article if article.title == sample.title and article.text == sample.text# or article.perma_link == sample.perma_link
       end
       nil
     end
