@@ -1,7 +1,7 @@
 # coding: utf-8
 class Article < ActiveRecord::Base
   
-  attr_accessible :title, :text, :url, :original_article
+  attr_accessible :title, :text, :url, :original_id
   
   has_many :company_mentions
   has_many :companies, :through => :company_mentions
@@ -56,11 +56,11 @@ class Article < ActiveRecord::Base
     articles = Article.all
     articles.each do |article|
       article_dublicate = article.find_dublicate article
-      if article_dublicate #and original_article != id. TODO: move to find_dublicate
+      if article_dublicate #and original_id != id. TODO: move to find_dublicate
         if article_dublicate.created_at > article.created_at
-          article_dublicate.original_article = article.id
+          article_dublicate.original_id = article.id
         else 
-          article.original_article = article_dublicate.id
+          article.original_id = article_dublicate.id
         end
       end
     end
