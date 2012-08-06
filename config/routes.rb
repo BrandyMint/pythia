@@ -1,6 +1,10 @@
 Pythia::Application.routes.draw do
 
 
+  get "articles/index"
+
+  get "articles/show"
+
   # get "company_mention/index"
 
   # get "company_mention/show"

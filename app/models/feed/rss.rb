@@ -2,12 +2,22 @@
 require 'open-uri'
 class Feed::Rss < Feed
 
+  before_validation do
+    self.source ||= Source.find_by_name 'manual'
+    self.name ||= dom.title
+  end
+
+  def dom
+    @dom ||= SimpleRSS.parse open(url)
+  end
+
   def collect_articles
     begin
-      lenta = SimpleRSS.parse(open(url))
-      lenta.items.each do |msg|
+      dom.items.each do |msg|
         articles.create :title => msg.title, :url => msg.link, :text => msg.description
       end
+
+      self.touch
     rescue OpenURI::HTTPError
       puts "feed #{url} not avaible"
       logger.info("RSS_NOTIFICATION - RSS Feed not avaible #{url}")

@@ -1,10 +1,14 @@
 # coding: utf-8
 class Article < ActiveRecord::Base
-  
+
   attr_accessible :title, :text, :url, :original_id
-  
+
   has_many :company_mentions
   has_many :companies, :through => :company_mentions
+  has_many :duplicates, :foreign_key => :original_id, :class_name => 'Article'
+
+  belongs_to :original, :class_name => 'Article'
+
   belongs_to :feed
 
   scope :last_week, where('created_at >=? and created_at <= ?', 1.week.ago.to_s(:db), Time.now.to_s(:db))
@@ -33,7 +37,7 @@ class Article < ActiveRecord::Base
 
     # Ищет в базе оригинальную статью по примеру
     def find_original sample
-      Articles.find_each do |article|
+      Article.find_each do |article|
         # TODO улучшить механизм поиска оригинала
         return article if article.title == sample.title and article.text == sample.text or article.perma_link == sample.perma_link
       end

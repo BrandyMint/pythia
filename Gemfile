@@ -22,6 +22,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'tabletastic'
+gem 'haml-rails'
 gem 'jquery-rails'
 gem 'activeadmin'
 #gem 'sass-rails'
@@ -34,6 +36,8 @@ gem 'activeadmin'
 
 # Use unicorn as the app server
 gem 'unicorn'
+
+gem 'kaminari'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -51,7 +55,6 @@ gem 'pg'
 gem 'mysql2'
 gem 'mysql2_downcase'
 gem 'url_validation'
-gem 'haml'
 gem 'foreverb'
 # gem  "activerecord-mysql2_downcase-adapter"
 
