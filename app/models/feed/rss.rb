@@ -1,33 +1,24 @@
- # coding: utf-8
+# coding: utf-8
 require 'open-uri'
+require 'feedzirra'
 class Feed::Rss < Feed
 
-  before_validation do
-    puts "Feed:validate #{url}"
-    self.source ||= Source.find_by_name 'manual'
-    debugger
-    self.name ||= dom.title
-  end
-
-  def dom
-    @dom ||= SimpleRSS.parse open(url)
-  end
+  # before_validation do
+  #   # puts "Feed:validate #{url}"
+  #   # self.source ||= Source.find_by_name 'manual'
+  #   # self.name ||= dom.title
+  #   true
+  # end
 
   def collect_articles
-    begin
-      dom.items.each do |msg|
-        articles.create :title => msg[:title],
-              :url => msg[:link],
-              :text => msg[:description],
-              :guid => msg[:guid] #,
-              # :perma_link => msg[:guid].isPermaLink="true"
+    lenta = Feedzirra::Feed.fetch_and_parse(url)
+    if lenta
+      lenta.entries.each do |msg|
+        articles.create(:title => msg.title, :url => msg.url, :text => msg.summary, :guid => msg.entry_id)
       end
-
       self.touch
-    rescue OpenURI::HTTPError => err
-      raise err
-    rescue ActiveRecord::StatementInvalid => err
-      raise err
+    else
+      puts "404 #{url}"
     end
   end
 end

@@ -50,6 +50,8 @@ gem 'activerecord-postgresql-adapter'
 # gem "ruby-debug19"
 gem 'debugger'
 gem 'feedzirra'
+gem 'curb', '0.8.1'
+
 #gem 'mysql2', '< 0.3'
 gem 'pg'
 gem 'mysql2'

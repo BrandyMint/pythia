@@ -54,9 +54,9 @@ ActiveRecord::Schema.define(:version => 20120806102339) do
     t.datetime "updated_at",                      :null => false
     t.integer  "feed_id",                         :null => false
     t.integer  "original_id"
-    t.integer  "duplicates_count", :default => 0, :null => false
     t.string   "perma_link"
     t.string   "guid"
+    t.integer  "duplicates_count", :default => 0, :null => false
   end
 
   create_table "companies", :force => true do |t|
