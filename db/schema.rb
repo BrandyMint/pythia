@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(:version => 20120806102339) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
-    t.string   "url",           :null => false
-    t.text     "text",          :null => false
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "feed_id",       :null => false
-    t.integer  "company_id_id"
+    t.string   "url",                             :null => false
+    t.text     "text",                            :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "feed_id",                         :null => false
     t.integer  "original_id"
+    t.integer  "duplicates_count", :default => 0, :null => false
     t.string   "perma_link"
     t.string   "guid"
   end
@@ -83,10 +83,11 @@ ActiveRecord::Schema.define(:version => 20120806102339) do
   create_table "feeds", :force => true do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "source_id",  :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "source_id",      :default => 0, :null => false
     t.string   "type"
+    t.integer  "articles_count", :default => 0, :null => false
   end
 
   add_index "feeds", ["url"], :name => "index_feeds_on_url", :unique => true
