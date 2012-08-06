@@ -68,6 +68,7 @@ gem 'foreverb'
 # group :test, :development do
 #   gem 'sunspot-rails-tester'
 # end
+gem 'delayed_job_active_record'
 
 group :test, :development do
   gem 'rspec'
