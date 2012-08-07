@@ -10,6 +10,8 @@ Forever.run do
   end
 
   every 20.minute do
-    Feed.all.map{ |f| f.collect_articles }
+    Feed.find_each do |feed|
+      feed.collect_articles
+    end
   end
 end
