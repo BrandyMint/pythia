@@ -3,7 +3,6 @@ class RefactoringToArticles < ActiveRecord::Migration
     change_column :articles, :title, :string, :null => false
 
     add_index :articles, :title
-    add_index :articles, :text
     add_index :articles, :created_at
     add_index :articles, :feed_id
     add_index :articles, :original_id
