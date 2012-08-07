@@ -9,7 +9,7 @@ Forever.run do
     Rake::Task['environment'].invoke
   end
 
-  every 10.minute do
-    Feed.find_each { |feed| feed.collect_articles}
+  every 20.minute do
+    Feed.all.map{ |f| f.collect_articles }
   end
 end

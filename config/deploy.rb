@@ -15,6 +15,7 @@ namespace :vlad do
            vlad:put_revision
            vlad:cleanup
            vlad:delayed_job:restart
+           vlad:foreverb
     ]
 end
 
