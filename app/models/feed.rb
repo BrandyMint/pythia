@@ -1,7 +1,7 @@
 # coding: utf-8
 class Feed < ActiveRecord::Base
 
-  attr_accessible :name, :url, :source_id, :type
+  attr_accessible :name, :url, :source_id, :type, :source_id
 
   has_many :articles
   belongs_to :source
@@ -19,4 +19,5 @@ class Feed < ActiveRecord::Base
   def to_s
     self.name
   end
+
 end
