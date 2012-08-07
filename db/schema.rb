@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807122246) do
+ActiveRecord::Schema.define(:version => 20120807122821) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -129,11 +129,14 @@ ActiveRecord::Schema.define(:version => 20120807122246) do
   add_index "feeds", ["url"], :name => "index_feeds_on_url", :unique => true
 
   create_table "sources", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
+    t.string   "name",       :null => false
+    t.string   "url",        :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "type",       :null => false
   end
+
+  add_index "sources", ["name"], :name => "index_sources_on_name"
+  add_index "sources", ["type"], :name => "index_sources_on_type"
 
 end
