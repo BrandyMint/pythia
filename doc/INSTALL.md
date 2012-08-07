@@ -2,6 +2,7 @@
 =====================
 
 > git, rvm, rails, postresql
+
 Нужно установить следующие пакеты для работы некоторых гемов:
 
 `sudo apt-get install libcurl4-openssl-dev`
