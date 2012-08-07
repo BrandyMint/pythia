@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807122821) do
+ActiveRecord::Schema.define(:version => 20120807140556) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(:version => 20120807122821) do
   add_index "articles", ["feed_id"], :name => "index_articles_on_feed_id"
   add_index "articles", ["original_id"], :name => "index_articles_on_original_id"
   add_index "articles", ["perma_link"], :name => "index_articles_on_perma_link"
-  add_index "articles", ["text"], :name => "index_articles_on_text"
   add_index "articles", ["title"], :name => "index_articles_on_title"
 
   create_table "companies", :force => true do |t|
