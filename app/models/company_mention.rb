@@ -10,8 +10,9 @@ class CompanyMention < ActiveRecord::Base
 
   scope :by_company, lambda { |company| where :company_id=>company.id }
   scope :by_article, lambda { |article| where :article_id=>article.id }
-  scope :get_article, select('count(*)').group('article_id')
 
+  #  TODO Удалить отсюда этот scope, нельзя в scoupaх исопльзовать count(*) скоупы должны возвращать список обьектов
+  scope :get_article, select('count(*)').group('article_id')
 
   def self.get_mention_by_day day
     # Возращает число упоминаний в текущий день
