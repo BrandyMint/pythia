@@ -38,7 +38,9 @@ class Article < ActiveRecord::Base
       
     # Ищет в базе оригинальную статью по примеру
     def find_original sample
-      Article.find_each do |article|
+      Article.where('created_at > current_date-14').find_each do |article|
+        next if article.id==id
+
         # TODO улучшить механизм поиска оригинала
         return article if article.title == sample.title and article.text == sample.text# or article.perma_link == sample.perma_link
       end
