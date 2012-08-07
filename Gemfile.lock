@@ -67,6 +67,7 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.6)
     curb (0.8.1)
+    daemons (1.1.8)
     debugger (1.1.4)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
@@ -248,6 +249,7 @@ DEPENDENCIES
   airbrake
   coffee-rails (~> 3.2.1)
   curb (= 0.8.1)
+  daemons
   debugger
   delayed_job_active_record
   feedzirra
