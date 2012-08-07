@@ -39,6 +39,8 @@ gem 'unicorn'
 
 gem 'kaminari'
 
+gem 'daemons'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
