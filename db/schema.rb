@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807120833) do
+ActiveRecord::Schema.define(:version => 20120807121258) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -87,11 +87,14 @@ ActiveRecord::Schema.define(:version => 20120807120833) do
   add_index "company_mentions", ["company_id"], :name => "index_company_mentions_on_company_id"
 
   create_table "company_synonyms", :force => true do |t|
-    t.integer  "company_id_id"
-    t.string   "synonym"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "company_id", :null => false
+    t.string   "synonym",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  add_index "company_synonyms", ["company_id"], :name => "index_company_synonyms_on_company_id"
+  add_index "company_synonyms", ["synonym"], :name => "index_company_synonyms_on_synonym"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
