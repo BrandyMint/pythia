@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807120413) do
+ActiveRecord::Schema.define(:version => 20120807120833) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -77,11 +77,14 @@ ActiveRecord::Schema.define(:version => 20120807120413) do
   add_index "companies", ["slug"], :name => "index_companies_on_slug"
 
   create_table "company_mentions", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "article_id"
+    t.integer  "company_id", :null => false
+    t.integer  "article_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "company_mentions", ["article_id"], :name => "index_company_mentions_on_article_id"
+  add_index "company_mentions", ["company_id"], :name => "index_company_mentions_on_company_id"
 
   create_table "company_synonyms", :force => true do |t|
     t.integer  "company_id_id"
