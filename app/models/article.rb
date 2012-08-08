@@ -17,10 +17,7 @@ class Article < ActiveRecord::Base
   validates :url, :presence => true, :url => true
   validates :guid, :presence => true
 
-  before_create do
-    self.original = Article.find_original self
-  end
-
+  before_create :find_original
   after_create :search_and_create_companies_mentions
 
   class << self
@@ -35,16 +32,15 @@ class Article < ActiveRecord::Base
         article.search_and_create_companies_mentions
       end
     end
-      
-    # Ищет в базе оригинальную статью по примеру
-    def find_original sample
-      Article.where('created_at > current_date-14').find_each do |article|
-        next if article.id==id
+  end
 
-        # TODO улучшить механизм поиска оригинала
-        return article if article.title == sample.title and article.text == sample.text# or article.perma_link == sample.perma_link
-      end
-      nil
+  # Ищет в базе оригинальную статью по примеру
+  def find_original
+    Article.where('created_at > current_date-14').find_each do |article|
+      next if article.id==id
+
+      # TODO улучшить механизм поиска оригинала
+      return self.original =  article if article.title == title and article.text == text# or article.perma_link == sample.perma_link
     end
   end
 
