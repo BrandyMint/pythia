@@ -11,7 +11,7 @@ Forever.run do
 
   every 20.minute do
     Feed.find_each do |feed|
-      feed.collect_articles
+      feed.collect_articles if feed.type
     end
   end
 end
