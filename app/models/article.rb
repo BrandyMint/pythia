@@ -17,7 +17,7 @@ class Article < ActiveRecord::Base
   validates :url, :presence => true, :url => true
   validates :guid, :presence => true
 
-  before_create :find_original
+  before_create :set_original
   after_create :search_and_create_companies_mentions
 
   class << self
@@ -34,10 +34,12 @@ class Article < ActiveRecord::Base
     end
   end
 
+  protected
+
   # Ищет в базе оригинальную статью по примеру
-  def find_original
+  def set_original
     Article.where('created_at > current_date-14').find_each do |article|
-      next if article.id==id
+      next if persisted? and article.id==id
 
       # TODO улучшить механизм поиска оригинала
       return self.original =  article if article.title == title and article.text == text# or article.perma_link == sample.perma_link
