@@ -10,8 +10,13 @@ Forever.run do
   end
 
   every 20.minute do
-    Feed.find_each do |feed|
-      feed.collect_articles if feed.type
-    end
+    feeds = Feed.all
+      feeds.each do |feed|
+        begin
+          feed.collect_articles
+        rescue# Feed::NotImplemented => e
+          puts "#{feed} not implemented"
+        end
+      end
   end
 end

@@ -19,7 +19,8 @@ class Feed::Rss < Feed
         articles.create :title => entity.title, :url => entity.url, :text => entity.summary, :guid => entity.id
       end
       self.touch
-    rescue
+    rescue Feedzirra => e
+      logger.error "ERROR: check #{feed} feed. #{e.message}"
     end
   end
 end

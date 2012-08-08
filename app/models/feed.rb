@@ -13,7 +13,7 @@ class Feed < ActiveRecord::Base
   def collect_articles
     logger.error "FEED not emplementation method 'collect_articles'. \
         Possibility 'feed' field 'type' is erroneous."
-    raise "not implemented"
+    raise NotImplemented, "not implemented"
   end
 
   def to_s
