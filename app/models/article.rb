@@ -20,6 +20,10 @@ class Article < ActiveRecord::Base
   before_create :set_original
   after_create :search_and_create_companies_mentions
 
+  def to_s
+    title
+  end
+
   class << self
     def count_company_mentions
       CompanyMention.select('count(*)').group('article_id').all.count
@@ -62,7 +66,4 @@ class Article < ActiveRecord::Base
     company_mentions.by_company company
   end
 
-  def to_s
-    title
-  end
 end
