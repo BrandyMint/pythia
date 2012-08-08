@@ -1,24 +1,11 @@
 # coding: utf-8
 class Company < ActiveRecord::Base
-# TODO использовать оригинальную базу
-
+  # TODO использовать оригинальную базу
+  establish_connection "icfdedb_#{Rails.env}"
+  
   has_many :company_mentions
   has_many :company_synonyms
   has_many :articles, :through => :company_mentions
-
-  def self.update_companies
-    companies = CompanyIcf.all
-    companies.each do |company|
-      local_company = Company.where(:id => company.id).first
-      unless local_company
-        local_company = Company.new
-        local_company.id = company.id
-      end
-      local_company.name = company.name
-      local_company.slug = company.slug
-      local_company.save
-    end
-  end
 
   def self.search_by_word word
     companies = Company.all
