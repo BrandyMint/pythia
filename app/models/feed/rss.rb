@@ -19,8 +19,11 @@ class Feed::Rss < Feed
         articles.create :title => entity.title, :url => entity.url, :text => entity.summary, :guid => entity.id
       end
       self.touch
-    rescue Feedzirra => e
+    rescue Feedzirra::NoParserAvailable => e
       logger.error "ERROR: check #{feed} feed. #{e.message}"
+
+    require ActiveRecord::StatementInvalid => e
+      logger.warn "#{e.message}"
     end
   end
 end
