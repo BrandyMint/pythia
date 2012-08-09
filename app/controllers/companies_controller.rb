@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
   
   def show
     @company = Company.find params[:id]
-    respond_with @companies
+    respond_with @company
   end
 
 end
