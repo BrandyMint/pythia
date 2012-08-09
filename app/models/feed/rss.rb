@@ -11,25 +11,45 @@ class Feed::Rss < Feed
 
   def feed
     @feed ||= Feedzirra::Feed.fetch_and_parse(url)
+    update_attribute_start @feed
+    @feed
   end
 
   def collect_articles
-    begin
-      feed.entries.each do |entity|
-        articles.create :title => entity.title, :url => entity.url, :text => entity.summary, :guid => entity.id
-      end
-      self.touch
-    rescue Feedzirra::NoParserAvailable => e
-      logger.error "ERROR: check #{feed} feed. #{e.message}"
+    if feed.status == "active"
+      begin
+        feed.entries.each do |entity|
+          articles.create :title => entity.title, :url => entity.url, :text => entity.summary, :guid => entity.id
+        end
+        self.touch
+      rescue Feedzirra::NoParserAvailable => e
+        logger.error "ERROR: check #{feed} feed. #{e.message}"
+        self.status = "error"
 
-    require ActiveRecord::StatementInvalid => e
-      logger.warn "#{e.message}"
+      rescue ActiveRecord::StatementInvalid => e
+        logger.warn "#{e.message}"
+      end
+    update_attribute_finish
     end
   end
+
+private
+  
+  #todo: проверить на работоспособность
+  def update_attribute_start feed
+    begin
+      value = feed.ttl
+    rescue NoMethodError => e
+      value = nil
+    end
+    self.collect_started_at = Time.now.to_datetime
+    self.ttl = value
+    self.status = "collecting"
+  end
+
+  def update_attribute_finish
+    self.collect_finished_at = Time.now.to_datetime
+    self.interval_time_last_collected = self.collect_finished_at - self.collect_started_at
+    self.status = "active"
+  end
 end
-
-
-=begin
-  1.9.3p125 :021 > lenta.entries.first
-  <Feedzirra::Parser::RSSEntry:0x0000000724bf88 @title="Медведев спустился в угольную шахту \"Листвяжная\"", @url="http://news.yandex.ru/yandsearch?cl4url=www.rosbalt.ru%2Ffederal%2F2012%2F08%2F06%2F1019407.html&cat=6&lang=ru", @summary="Глава российского правительства Дмитрий Медведев в понедельник проведет совещание по развитию угольной промышленности в Ленинск-Кузнецком Кемеровской области, а также посетит шахту &quot;Комсомолец&quot;, на которой в конце июля произошел пожар, сообщили в пресс-службе кабинета министров.", @published=2012-08-06 13:05:19 UTC, @entry_id="http://news.yandex.ru/yandsearch?cl4url=www.rosbalt.ru%2Ffederal%2F2012%2F08%2F06%2F1019407.html&cat=6&lang=ru"> 
-=end
