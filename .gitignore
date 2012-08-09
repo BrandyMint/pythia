@@ -17,3 +17,7 @@
 /config/database.yml
 /solr/data
 *.swp
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml

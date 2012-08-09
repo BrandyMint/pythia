@@ -1,0 +1,1 @@
+investcafe_db: '"icfdedb_#{Rails.env}"'

@@ -1,7 +1,7 @@
 # coding: utf-8
 class Company < ActiveRecord::Base
-  # TODO использовать оригинальную базу
-  establish_connection "icfdedb_#{Rails.env}"
+  investcafe_db = Settings.investcafe_db
+  establish_connection = investcafe_db
   
   has_many :company_mentions
   has_many :company_synonyms
