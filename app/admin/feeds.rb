@@ -7,6 +7,13 @@ ActiveAdmin.register Feed do
     redirect_to({:action => :show}, {:notice => "Collected!"})
   end
 
+  member_action :deactive do
+    feed = Feed.find params[:id]
+    feed.state = "deactive"
+    feed.save
+    redirect_to({:action => :show}, {notice => "Лента выключена!"})
+  end
+
   member_action :create, :method => :post do
     source = Source.find_by_name "ManualRss"
     url = params[:feed][:url]
@@ -28,6 +35,10 @@ ActiveAdmin.register Feed do
   
   action_item :only => :show do
     link_to 'Собрать статьи', collect_admin_feed_path(feed)
+  end
+
+  action_item :only => :show do
+    link_to 'Выключить ленту', deactive_admin_feed_path(feed)
   end
 
   form do |f|

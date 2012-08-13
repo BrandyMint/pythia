@@ -80,4 +80,5 @@ end
 gem 'seed_dumper'
 gem 'foreman'
 gem 'twitter-bootstrap-markup-rails', :git => 'git://github.com/BrandyMint/twitter-bootstrap-markup-rails.git'
-gem "rails_config"
+gem 'rails_config'
+gem 'state_machine'
